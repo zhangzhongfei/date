@@ -25,6 +25,40 @@ class date
 
 
     }
+	
+	
+    /**
+     * 获取当前所在的时间，这个月有几天
+     * @param string $time
+     * @return bool|string
+     */
+    public function MonthDays($time = '')
+    {
+
+        $time = $time ? $time : time();
+
+        $y = date('y', $time); //指定的年
+        $m = date('m', $time); //指定的月
+        $d = date('j', mktime(0, 0, 1, ($m == 12 ? 1 : $m + 1), 1, ($m == 12 ? $y + 1 : $y)) - 24 * 3600);
+
+        return $d;
+    }
+
+    /**
+     * 获取指定日期星期几
+     * @param string $time
+     * @param int    $day
+     * @return bool|string
+     */
+    public function GetWeek($time = '', $day = 1)
+    {
+        $time = $time ? $time : time();
+        $y = date('y', $time); //指定的年
+        $m = date('m', $time); //指定的月
+        $date = mktime(0, 0, 0, $m, $day, $y);
+        $number_wk = date("w", $date);
+        return $number_wk;
+    }
 
     /**
      * 获取一年的各月起止时间
